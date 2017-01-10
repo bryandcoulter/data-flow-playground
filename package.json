@@ -1,0 +1,24 @@
+{
+  "name": "data-flow-playground",
+  "version": "1.0.0",
+  "description": "Playground for data flow and web component experiments",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bryandcoulter/data-flow-playground.git"
+  },
+  "author": "",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/bryandcoulter/data-flow-playground/issues"
+  },
+  "homepage": "https://github.com/bryandcoulter/data-flow-playground#readme",
+  "devDependencies": {
+    "gulp": "latest",
+    "gulp-connect": "^5.0.0",
+    "vinyl-source-stream": "^1.1.0"
+  }
+}

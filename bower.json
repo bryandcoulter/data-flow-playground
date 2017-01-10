@@ -1,0 +1,21 @@
+{
+  "name": "data-flow-playground",
+  "authors": [
+    "Bryan Coulter <bryandcoulter@gmail.com>"
+  ],
+  "description": "Playground for data flow and web component experiments",
+  "main": "index.html",
+  "license": "Apache-2",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer-observable-models": "https://github.com/ChadKillingsworth/polymer-observable-models.git"
+  }
+}

@@ -1,0 +1,31 @@
+<link rel="import" href="custom-base.html" />
+<link rel="import" href="advanced-button.html" />
+<dom-module id="account-element">
+  <template>
+    <style>
+      :host {
+        display: block;
+        border: 1px solid gray;
+        margin-bottom: 10px;
+        padding: 5px;
+      }
+    </style>
+    <h4>Account Information</h4>
+    <div>Location Name : [[account.locationName]]</div>
+    <div>Location Id : [[account.locationId]]</div>
+    <div>Account Number : [[account.membershipId]]</div>
+  </template>
+  <script>
+    class AccountElement extends CustomBase {
+      static get is() { return 'account-element'; }
+      static get config() {
+        return {
+          properties: {
+            account: ObservableModel
+          }
+        }
+      }
+    }
+    customElements.define(AccountElement.is, AccountElement);
+  </script>
+</dom-module>

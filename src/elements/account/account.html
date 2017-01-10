@@ -1,0 +1,29 @@
+<link rel="import" href="../../../bower_components/polymer/src/elements/element.html" />
+<link rel="import" href="../shared/header.html" />
+<link rel="import" href="../shared/account-element.html" />
+<link rel="import" href="../shared/update-account.html" />
+<dom-module id="account-view">
+  <template>
+    <div>Accounts</div>
+    <standard-header loggedin="true" controller="[[controller]]"></standard-header>
+    <account-element account="[[controller.account]]"></account-element>
+    <update-account on-saveaccount="save" account="[[controller.account]]"></update-account>
+  </template>
+  <script>
+    class Account extends Polymer.Element {
+      static get is() { return 'account-view'; }
+      static get config() {
+        return {properties: {
+          controller: BaseController
+        }};
+      }
+      constructor() {
+        super();
+      }
+      save(e) {
+        this.controller.changeAccount(e.detail);
+      }
+    }
+    customElements.define(Account.is, Account);
+  </script>
+</dom-module>

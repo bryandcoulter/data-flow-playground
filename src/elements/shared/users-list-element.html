@@ -1,0 +1,30 @@
+<link rel="import" href="custom-base.html" />
+<dom-module id="users-list-element">
+  <template>
+    <style>
+      :host {
+        display: block;
+        border: 1px solid gray;
+        margin-bottom: 10px;
+        padding: 5px;
+      }
+    </style>
+    <h4>User List</h4>
+    <template is="dom-repeat" items="{{usersmodel.users}}">
+      <div>[[item.name]] : [[item.email]]</div>
+    </template>
+  </template>
+  <script>
+    class UsersListElement extends CustomBase {
+      static get is() { return 'users-list-element'; }
+      static get config() {
+        return {
+          properties: {
+            usersmodel: ObservableModel
+          }
+        }
+      }
+    }
+    customElements.define(UsersListElement.is, UsersListElement);
+  </script>
+</dom-module>

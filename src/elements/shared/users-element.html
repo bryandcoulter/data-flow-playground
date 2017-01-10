@@ -1,0 +1,43 @@
+<link rel="import" href="custom-base.html" />
+<dom-module id="users-element">
+  <template>
+    <style>
+      :host {
+        display: block;
+        border: 1px solid gray;
+        margin-bottom: 10px;
+        padding: 5px;
+      }
+    </style>
+    <h4>User Information</h4>
+    <button on-click="sortAlphaUp">Sort Up</button>
+    <button on-click="sortAlphaDown">Sort Down</button>
+    <template is="dom-repeat" items="{{usersmodel.users}}">
+      <div>User Name : [[item.name]]</div>
+      <div>User Email : [[item.email]]</div>
+      <button on-click="edit" user="[[item]]">Edit</button>
+    </template>
+  </template>
+  <script>
+    class UsersElement extends CustomBase {
+      static get is() { return 'users-element'; }
+      static get config() {
+        return {
+          properties: {
+            usersmodel: ObservableModel
+          }
+        }
+      }
+      edit(e) {
+        this.dispatchEvent(new CustomEvent('edit', {bubbles: true, composed: true, detail: e.model.item}));
+      }
+      sortAlphaUp() {
+        this.dispatchEvent(new CustomEvent('sort', {bubbles: true, composed: true, detail: 'sortUp'}));
+      }
+      sortAlphaDown() {
+        this.dispatchEvent(new CustomEvent('sort', {bubbles: true, composed: true, detail: 'sortDown'}));
+      }
+    }
+    customElements.define(UsersElement.is, UsersElement);
+  </script>
+</dom-module>

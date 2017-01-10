@@ -1,0 +1,47 @@
+<link rel="import" href="custom-base.html" />
+<dom-module id="update-account">
+  <template>
+    <style>
+      :host {
+        display: block;
+        border: 1px solid gray;
+        margin-bottom: 10px;
+        padding: 5px;
+      }
+      input {
+        width: 250px;
+      }
+    </style>
+    <div>Location Name</div>
+    <input type="text" id="locationName" value="[[account.locationName]]" />
+    <div>Location Id</div>
+    <input type="text" id="locationId" value="[[account.locationId]]" />
+    <div>Account Number</div>
+    <input type="text" id="membershipId" value="[[account.membershipId]]" />
+    <button on-click="save">Save</button>
+  </template>
+  <script>
+    class UpdateAccount extends CustomBase {
+      static get is() { return 'update-account'; }
+      static get config() {
+        return {
+          properties: {
+            account: ObservableModel
+          }
+        }
+      }
+      constructor() {
+        super();
+      }
+      save() {
+        this.dispatchEvent(new CustomEvent('saveaccount', {bubbles: true, composed: true, detail:
+        {
+          locationName: this.shadowRoot.querySelector('#locationName').value,
+          locationId: this.shadowRoot.querySelector('#locationId').value,
+          membershipId: this.shadowRoot.querySelector('#membershipId').value
+        }}));
+      }
+    }
+    customElements.define(UpdateAccount.is, UpdateAccount);
+  </script>
+</dom-module>

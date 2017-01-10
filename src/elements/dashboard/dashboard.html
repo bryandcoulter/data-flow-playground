@@ -1,0 +1,23 @@
+<link rel="import" href="../../../bower_components/polymer/src/elements/element.html" />
+<link rel="import" href="../shared/header.html" />
+<dom-module id="dashboard-view">
+  <template>
+    <div>Dashboard</div>
+    <standard-header loggedin="true" controller="[[controller]]"></standard-header>
+    <h2>Welcome to the dashboard</h2>    
+  </template>
+  <script>
+    class Dashboard extends Polymer.Element {
+      static get is() { return 'dashboard-view'; }
+      static get config() {
+        return {properties: {
+          controller: BaseController
+        }};
+      }
+      constructor() {
+        super();
+      }
+    }
+    customElements.define(Dashboard.is, Dashboard);
+  </script>
+</dom-module>

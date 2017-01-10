@@ -1,0 +1,22 @@
+<link rel="import" href="custom-base.html" />
+<dom-module id="advanced-button">
+  <template>
+    <div>Advanced Button</div>
+    <button on-click="go">Go</button>
+  </template>
+  <script>
+    class AdvancedButton extends CustomBase {
+      static get is() { return 'advanced-button'; }
+      static get config() {
+        return { properties: {}}
+      }
+      constructor() {
+        super();
+      }
+      go() {
+        this.dispatchEvent(new Event('advancedbutton', {bubbles: true, composed: true}));
+      }
+    }
+    customElements.define(AdvancedButton.is, AdvancedButton);
+  </script>
+</dom-module>

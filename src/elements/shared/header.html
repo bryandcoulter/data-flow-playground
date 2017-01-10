@@ -1,0 +1,52 @@
+<link rel="import" href="../shared/custom-base.html" />
+<dom-module id="standard-header">
+  <template>
+    <style>
+      :host {
+        display: block;
+        border: 1px solid gray;
+        margin-bottom: 10px;
+        padding: 5px;
+      }
+      input {
+        width: 250px;
+      }
+    </style>
+    <button on-click="dashboard">Dashboard</button>
+    <button on-click="account">Account Info</button>
+    <button on-click="userAdmin">User Admin</button>
+    <template is="dom-if" if="{{loggedin}}">
+      <button on-click="logout">logout</button>
+    </template>
+  </template>
+  <script>
+    class standardHeader extends CustomBase {
+      static get is() { return 'standard-header'; }
+      static get config() {
+        return {
+          properties: {
+            controller: BaseController,
+            loggedin: Boolean
+          }
+        }
+      }
+      constructor() {
+        super();
+        this.loggedin = false;
+      }
+      dashboard() {
+        this.controller.loadRoute('#/dashboard');
+      }
+      userAdmin() {
+        this.controller.loadRoute('#/admin');
+      }
+      account() {
+        this.controller.loadRoute('#/account');
+      }
+      logout() {
+        this.controller.loadRoute('#/logout');
+      }
+    }
+    customElements.define(standardHeader.is, standardHeader);
+  </script>
+</dom-module>

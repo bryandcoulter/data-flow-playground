@@ -1,0 +1,59 @@
+<link rel="import" href="../../../bower_components/polymer/src/elements/element.html" />
+<link rel="import" href="../shared/header.html" />
+<link rel="import" href="../shared/update-account.html" />
+<link rel="import" href="../shared/update-user.html" />
+<link rel="import" href="../shared/users-element.html" />
+<link rel="import" href="../shared/users-list-element.html" />
+<dom-module id="user-admin">
+
+  <template>
+  <style>
+    :host {
+      display: block;
+    }
+  </style>
+    <div>
+      <div>User Admin</div>
+      <log-in loggedin="true" controller="[[controller]]"></log-in>
+      <users-element on-sort="sort" on-edit="edit" usersmodel="[[controller.usersModel]]"></users-element>
+      <update-user on-save="save" user="[[controller.user]]"></update-user>
+      <users-list-element usersmodel="[[controller.usersModel]]"></users-list-element>
+    </div>
+  </template>
+  <script>
+    class UserAdmin extends Polymer.Element {
+      static get is() { return 'user-admin'; }
+      static get config() {
+        return {properties: {
+          loggedin: Boolean,
+          controller: BaseController
+        }};
+      }
+      constructor() {
+        super();
+      }
+      edit(e) {
+        this.controller.changeUser(e.detail);
+      }
+      sort(e) {
+        this.controller[e.detail]();
+      }
+      save(e) {
+        this.controller.saveUser(e.detail);
+        this.dispatchEvent(new CustomEvent('userschanged', {bubbles: true}));
+      }
+      attributeChangedCallback(name,xxx,value) {
+        if(name === 'loggedin') {
+          if(value === 'true') {
+              this.style.display = 'block';
+          } else {
+            this.style.display = 'none';
+          }
+
+        }
+        super.attributeChangedCallback();
+      }
+    }
+    customElements.define(UserAdmin.is, UserAdmin);
+  </script>
+</dom-module>

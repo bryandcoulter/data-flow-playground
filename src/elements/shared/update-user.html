@@ -1,0 +1,46 @@
+<link rel="import" href="custom-base.html" />
+<dom-module id="update-user">
+  <template>
+    <style>
+      :host {
+        display: block;
+        border: 1px solid gray;
+        margin-bottom: 10px;
+        padding: 5px;
+      }
+      input {
+        width: 250px;
+      }
+    </style>
+    <div>User Name</div>
+    <input type="text" id="name" value="[[user.name]]" />
+    <div>User Email</div>
+    <input type="text" id="email" value="[[user.email]]" />
+    <input type="hidden" value="[[user.userId]]" id="userId"/>
+    <button on-click="save">Save</button>
+  </template>
+  <script>
+    class UpdateUser extends CustomBase {
+      static get is() { return 'update-user'; }
+      static get config() {
+        return {
+          properties: {
+            user: ObservableModel
+          }
+        }
+      }
+      constructor() {
+        super();
+      }
+      save() {
+        this.dispatchEvent(new CustomEvent('save', {bubbles: true, composed: true, detail:
+        {
+          name: this.shadowRoot.querySelector('#name').value,
+          email: this.shadowRoot.querySelector('#email').value,
+          userId: this.shadowRoot.querySelector('#userId').value
+        }}));
+      }
+    }
+    customElements.define(UpdateUser.is, UpdateUser);
+  </script>
+</dom-module>

@@ -1,0 +1,59 @@
+<link rel="import" href="../shared/custom-base.html" />
+<dom-module id="log-in">
+  <template>
+    <style>
+      :host {
+        display: block;
+        border: 1px solid gray;
+        margin-bottom: 10px;
+        padding: 5px;
+      }
+      input {
+        width: 250px;
+      }
+    </style>
+    <template is="dom-if" if="{{!loggedin}}">
+      <div>User Name</div>
+      <input type="text" id="name" value="" />
+      <div>User Email</div>
+      <input type="text" id="email" value="" />
+      <button on-click="login">login</button>
+    </template>
+    <template is="dom-if" if="{{loggedin}}">      
+      <button on-click="login">Dashboard</button>
+      <button on-click="account">Account Info</button>
+      <button on-click="userAdmin">User Admin</button>
+      <button on-click="logout">logout</button>
+    </template>
+  </template>
+  <script>
+    class Login extends CustomBase {
+      static get is() { return 'log-in'; }
+      static get config() {
+        return {
+          properties: {
+            controller: BaseController,
+            loggedin: Boolean
+          }
+        }
+      }
+      constructor() {
+        super();
+        this.loggedin = false;
+      }
+      login() {
+        this.controller.loadRoute('#/dashboard');
+      }
+      userAdmin() {
+        this.controller.loadRoute('#/admin');
+      }
+      account() {
+        this.controller.loadRoute('#/account');
+      }
+      logout() {
+        this.controller.loadRoute('#/logout');
+      }
+    }
+    customElements.define(Login.is, Login);
+  </script>
+</dom-module>
