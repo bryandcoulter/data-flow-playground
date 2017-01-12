@@ -10,6 +10,9 @@
       }
     </style>
     <h4>User List</h4>
+    <template is="dom-if" if="{{fiterlist}}">
+      <input type="text" on-input="filter" placeholder="Filter List By Name"/>
+    </template>
     <template is="dom-repeat" items="{{usersmodel.users}}">
       <div>[[item.name]] : [[item.email]]</div>
     </template>
@@ -20,9 +23,16 @@
       static get config() {
         return {
           properties: {
-            usersmodel: ObservableModel
+            usersmodel: ObservableModel,
+            fiterlist: Boolean
           }
         }
+      }
+      constructor() {
+        super();
+      }
+      filter(e) {
+        this.usersmodel.filter = e.target.value;
       }
     }
     customElements.define(UsersListElement.is, UsersListElement);

@@ -6,19 +6,7 @@ class UsersActions {
 		 }
 	 }
 
-   static sortDown () {
-		 return {
-			 type: 'sortDown',
-		 }
-	 }
-
-	 static sortUp () {
-     return {
-			 type: 'sortUp',
-		 }
-	 }
-
-	 static updateUsers (user) {
+   static updateUsers (user) {
 		 return {
 			 type: 'updateUsers',
 			 user: user

@@ -1,5 +1,5 @@
 <link rel="import" href="../../../bower_components/polymer/src/elements/element.html" />
-<link rel="import" href="../shared/header.html" />
+<link rel="import" href="../shared/dumb-header.html" />
 <link rel="import" href="../shared/update-account.html" />
 <link rel="import" href="../shared/update-user.html" />
 <link rel="import" href="../shared/users-element.html" />
@@ -14,10 +14,10 @@
   </style>
     <div>
       <div>User Admin</div>
-      <log-in loggedin="true" controller="[[controller]]"></log-in>
+      <dumb-header loggedin="true"></dumb-header>
       <users-element on-sort="sort" on-edit="edit" usersmodel="[[controller.usersModel]]"></users-element>
       <update-user on-save="save" user="[[controller.user]]"></update-user>
-      <users-list-element usersmodel="[[controller.usersModel]]"></users-list-element>
+      <users-list-element fiterlist="false" usersmodel="[[controller.usersModel]]"></users-list-element>
     </div>
   </template>
   <script>
@@ -36,22 +36,12 @@
         this.controller.changeUser(e.detail);
       }
       sort(e) {
-        this.controller[e.detail]();
+        this.controller.usersModel.sort = e.detail;
       }
       save(e) {
         this.controller.saveUser(e.detail);
         this.dispatchEvent(new CustomEvent('userschanged', {bubbles: true}));
-      }
-      attributeChangedCallback(name,xxx,value) {
-        if(name === 'loggedin') {
-          if(value === 'true') {
-              this.style.display = 'block';
-          } else {
-            this.style.display = 'none';
-          }
-
-        }
-        super.attributeChangedCallback();
+        this.controller.usersModel.filter();
       }
     }
     customElements.define(UserAdmin.is, UserAdmin);

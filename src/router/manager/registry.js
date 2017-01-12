@@ -16,6 +16,12 @@ class RouteRegistry {
       admin: {
         tag: 'user-admin',
         controller: new UserAdminController()
+      },
+      accountSM: {
+        tag: 'account-sm'
+      },
+      adminSM: {
+        tag: 'useradmin-sm'
       }
     }
   }

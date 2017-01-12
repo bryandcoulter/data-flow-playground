@@ -1,5 +1,5 @@
 <link rel="import" href="../shared/custom-base.html" />
-<dom-module id="standard-header">
+<dom-module id="dumb-header">
   <template>
     <style>
       :host {
@@ -15,18 +15,18 @@
     <button on-click="dashboard">Dashboard</button>
     <button on-click="account">Account Info</button>
     <button on-click="userAdmin">User Admin</button>
-    <button on-click="changeRoute">Smart Account</button>
+    <button on-click="accountSM">Smart Account</button>
+    <button on-click="adminSM">Smart User Admin</button>
     <template is="dom-if" if="{{loggedin}}">
       <button on-click="logout">logout</button>
     </template>
   </template>
   <script>
-    class standardHeader extends CustomBase {
-      static get is() { return 'standard-header'; }
+    class dumbHeader extends CustomBase {
+      static get is() { return 'dumb-header'; }
       static get config() {
         return {
           properties: {
-            controller: BaseController,
             loggedin: Boolean
           }
         }
@@ -36,21 +36,27 @@
         this.loggedin = false;
       }
       dashboard() {
-        this.controller.loadRoute('#/dashboard');
+        this.changeRoute('#/dashboard');
       }
       userAdmin() {
-        this.controller.loadRoute('#/admin');
+        this.changeRoute('#/admin');
+      }
+      adminSM() {
+        this.changeRoute('#/admin-sm');
       }
       account() {
-        this.controller.loadRoute('#/account');
+        this.changeRoute('#/account');
+      }
+      accountSM() {
+        this.changeRoute('#/account-sm');
       }
       logout() {
-        this.controller.loadRoute('#/logout');
+        this.changeRoute('#/logout');
       }
-      changeRoute() {
-        this.controller.loadRoute('#/account-sm');
+      changeRoute(url) {
+        document.location = url;
       }
     }
-    customElements.define(standardHeader.is, standardHeader);
+    customElements.define(dumbHeader.is, dumbHeader);
   </script>
 </dom-module>

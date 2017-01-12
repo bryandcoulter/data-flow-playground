@@ -17,9 +17,19 @@ class UsersModel extends ObservableModel {
 
   set sort(value) {
     this._sort = value;
+    this[value]();
   }
 
-  toObject() {
+  get filter() {
+    return this._filter;
+  }
+
+  set filter(value) {
+    this._filter = value;
+    this.filterList();
+  }
+
+  toArray() {
     return this._users.map((_user) => {
       return {name: _user.name, email: _user.email, userId: _user.userId }
     });
@@ -31,6 +41,7 @@ class UsersModel extends ObservableModel {
       user.toModel(_user);
       return _user;
     });
+    this._original = this.toArray();
     this.emit({
       path: 'users',
       value: this._users
@@ -42,6 +53,39 @@ class UsersModel extends ObservableModel {
       const user = new UserModel();
       user.toModel(_user);
       return _user;
+    });
+    this._original = this.toArray();
+  }
+
+  sortUp(){
+    this.users = this.users.sort((a, b) => {
+      var nameA = a.name.toUpperCase();
+      var nameB = b.name.toUpperCase();
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      return 0;
+    });
+  }
+  sortDown() {
+    this.users = this.users.sort((a, b) => {
+      var nameA = a.name.toUpperCase();
+      var nameB = b.name.toUpperCase();
+      if (nameA > nameB) {
+        return -1;
+      }
+      if (nameA < nameB) {
+        return 1;
+      }
+      return 0;
+    });
+  }
+  filterList() {
+    this.users = this._original.filter((value) => {
+      return value.name.toLowerCase().indexOf(this.filter.toLowerCase()) >= 0;
     });
   }
 }

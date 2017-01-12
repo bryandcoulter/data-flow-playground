@@ -1,0 +1,69 @@
+<link rel="import" href="../../../bower_components/polymer/src/elements/element.html" />
+<link rel="import" href="../shared/dumb-header.html" />
+<link rel="import" href="../shared/update-account.html" />
+<link rel="import" href="../shared/update-user.html" />
+<link rel="import" href="../shared/users-element.html" />
+<link rel="import" href="../shared/users-list-element.html" />
+<dom-module id="useradmin-sm">
+
+  <template>
+  <style>
+    :host {
+      display: block;
+    }
+  </style>
+    <div>
+      <div>User Admin</div>
+      <dumb-header loggedin="true"></dumb-header>
+      <users-element on-sort="sort" on-edit="edit" usersmodel="[[usersModel]]"></users-element>
+      <update-user on-save="save" user="[[user]]"></update-user>
+      <users-list-element fiterlist="true" usersmodel="[[usersModelList]]"></users-list-element>
+    </div>
+  </template>
+  <script>
+    class UserAdminSM extends Polymer.Element {
+      static get is() { return 'useradmin-sm'; }
+      static get config() {
+        return {properties: {}};
+      }
+      constructor() {
+        super();
+        this.user = new UserModel();
+        this.usersModel = new UsersModel();
+        this.usersModel.toModel(LocalStorage.load('USERS'));
+        this.usersModelList = new UsersModel();
+        this.usersModelList.toModel(LocalStorage.load('USERS'));
+      }
+      connectedCallback() {
+        super.connectedCallback();
+        this.usersModelList.sort = 'sortDown';
+      }
+      edit(e) {
+        this.user.toObserveModel(e.detail);
+      }
+      sort(e) {
+        this.usersModel.sort = e.detail;
+      }
+      save(e) {
+        const newLocalArray = LocalStorage.load('USERS').users.map((_user) => {
+          if(e.detail.userId === _user.userId) {
+            return e.detail;
+          } else {
+            return _user;
+          }
+        });
+        LocalStorage.save('USERS', {users: newLocalArray});
+        this.usersModel.toObserveModel(LocalStorage.load('USERS'));
+        this.usersModelList.toObserveModel(LocalStorage.load('USERS'));
+        if(this.usersModel.sort) {
+          this.usersModel[this.usersModel.sort]();
+        }
+        if(this.usersModelList.sort) {
+          this.usersModelList[this.usersModelList.sort]();
+        }
+        this.usersModelList.filterList();
+      }
+    }
+    customElements.define(UserAdminSM.is, UserAdminSM);
+  </script>
+</dom-module>

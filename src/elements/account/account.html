@@ -1,11 +1,11 @@
 <link rel="import" href="../../../bower_components/polymer/src/elements/element.html" />
-<link rel="import" href="../shared/header.html" />
+<link rel="import" href="../shared/dumb-header.html" />
 <link rel="import" href="../shared/account-element.html" />
 <link rel="import" href="../shared/update-account.html" />
 <dom-module id="account-view">
   <template>
     <div>Accounts</div>
-    <standard-header loggedin="true" controller="[[controller]]"></standard-header>
+    <dumb-header loggedin="true"></dumb-header>
     <account-element account="[[controller.account]]"></account-element>
     <update-account on-saveaccount="save" account="[[controller.account]]"></update-account>
   </template>

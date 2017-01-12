@@ -1,6 +1,6 @@
 class UserAdminController extends BaseController {
   constructor() {
-    super();    
+    super();
     this.user = new UserModel();
     this._userStore = UserStore.store(this.user);
     this.usersModel = new UsersModel();
@@ -19,20 +19,7 @@ class UserAdminController extends BaseController {
     const usersAction = UsersActions.reloadFromDB();
     this._usersStore.dispatch(usersAction);
     if(this.usersModel.sort) {
-      this[this.usersModel.sort]();
+      this.usersModel[this.usersModel.sort]();
     }
   }
-
-  sortUp() {
-    const sortAction = UsersActions.sortUp();
-    this._usersStore.dispatch(sortAction);
-    this.usersModel.sort = 'sortUp';
-  }
-
-  sortDown() {
-    const sortAction = UsersActions.sortDown();
-    this._usersStore.dispatch(sortAction);
-    this.usersModel.sort = 'sortDown';
-  }
-
 }
