@@ -11,10 +11,16 @@
     :host {
       display: block;
     }
+    .show {
+      display: block;
+    }
+    .hide {
+      display: none;
+    }
   </style>
     <div>
       <div>User Admin</div>
-      <dumb-header loggedin="true"></dumb-header>
+      <dumb-header class$="[[headerclass]]" loggedin="true"></dumb-header>
       <users-element on-sort="sort" on-edit="edit" usersmodel="[[controller.usersModel]]"></users-element>
       <update-user on-save="save" user="[[controller.user]]"></update-user>
       <users-list-element fiterlist="false" usersmodel="[[controller.usersModel]]"></users-list-element>
@@ -26,7 +32,8 @@
       static get config() {
         return {properties: {
           loggedin: Boolean,
-          controller: BaseController
+          controller: BaseController,
+          headerclass: String
         }};
       }
       constructor() {

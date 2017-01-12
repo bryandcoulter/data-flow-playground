@@ -11,10 +11,16 @@
     :host {
       display: block;
     }
+    .show {
+      display: block;
+    }
+    .hide {
+      display: none;
+    }
   </style>
     <div>
       <div>User Admin</div>
-      <dumb-header loggedin="true"></dumb-header>
+      <dumb-header class$="[[headerclass]]" loggedin="true"></dumb-header>
       <users-element on-sort="sort" on-edit="edit" usersmodel="[[usersModel]]"></users-element>
       <update-user on-save="save" user="[[user]]"></update-user>
       <users-list-element fiterlist="true" usersmodel="[[usersModelList]]"></users-list-element>
@@ -24,7 +30,11 @@
     class UserAdminSM extends Polymer.Element {
       static get is() { return 'useradmin-sm'; }
       static get config() {
-        return {properties: {}};
+        return {
+          properties: {
+            headerclass: String
+          }
+        };
       }
       constructor() {
         super();

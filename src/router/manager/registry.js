@@ -2,26 +2,30 @@ class RouteRegistry {
   static get routes() {
     return {
       account: {
-        tag: 'account-view',
+        tags: ['account-view'],
         controller: new AccountController()
       },
       dashboard: {
-        tag: 'dashboard-view',
+        tags: ['dashboard-view'],
         controller: new BaseController()
       },
       login: {
-        tag: 'log-in',
+        tags: ['log-in'],
         controller: new BaseController()
       },
       admin: {
-        tag: 'user-admin',
+        tags: ['user-admin'],
         controller: new UserAdminController()
       },
       accountSM: {
-        tag: 'account-sm'
+        tags: ['account-sm']
       },
       adminSM: {
-        tag: 'useradmin-sm'
+        tags: ['useradmin-sm']
+      },
+      twoUp: {
+        tags: ['account-sm','useradmin-sm'],
+        layout: 'two-up'
       }
     }
   }

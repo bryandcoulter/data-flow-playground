@@ -84,8 +84,10 @@ class UsersModel extends ObservableModel {
     });
   }
   filterList() {
-    this.users = this._original.filter((value) => {
-      return value.name.toLowerCase().indexOf(this.filter.toLowerCase()) >= 0;
-    });
+    //if(this.filter) {
+      this.users = this._original.filter((value) => {
+        return value.name.toLowerCase().indexOf(this.filter.toLowerCase()) >= 0;
+      });
+    //}
   }
 }

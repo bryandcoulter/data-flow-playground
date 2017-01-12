@@ -16,7 +16,8 @@ function router() {
       route = 'accountSM';
     } else if(url.indexOf('account') > 0) {
       route = 'account';
-    }
-        
+    } else if(url.indexOf('two-up') > 0) {
+      route = 'twoUp';
+    }    
     routeManager.dispatch(RouterActions.changeRoute({view: view, route: route}));
 }

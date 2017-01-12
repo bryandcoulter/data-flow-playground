@@ -17,6 +17,7 @@
     <button on-click="userAdmin">User Admin</button>
     <button on-click="accountSM">Smart Account</button>
     <button on-click="adminSM">Smart User Admin</button>
+    <button on-click="twoUp">Layout 2 Up</button>
     <template is="dom-if" if="{{loggedin}}">
       <button on-click="logout">logout</button>
     </template>
@@ -52,6 +53,9 @@
       }
       logout() {
         this.changeRoute('#/logout');
+      }
+      twoUp() {
+        this.changeRoute('#/two-up');
       }
       changeRoute(url) {
         document.location = url;

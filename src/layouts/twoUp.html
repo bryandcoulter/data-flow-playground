@@ -1,0 +1,53 @@
+<dom-module id="two-up">
+  <template>
+    <style>
+      .section {
+        width:48%;
+        border: 1px solid black;
+      }
+      #section1 {
+        float: left;
+      }
+      #section2 {
+        float: right;
+      }
+    </style>
+    <dumb-header loggedin="true"></dumb-header>
+    <div class="section" id="section1">
+      <account-sm headerclass="hide"></account-sm>
+    </div>
+    <div class="section" id="section2">
+      <useradmin-sm headerclass="hide"></useradmin-sm>
+    </div>
+  </template>
+  <script>
+    class layoutTwoUp extends CustomBase {
+      static get is() { return 'two-up'; }
+      static get config() {
+        return {
+            properties: {
+              pageElements: Array
+            }
+        }
+      }
+      constructor() {
+        super();
+        console.log(this.prototype);
+      }
+      connectedCallback() {
+        for(let x=0; x<this.pageElements.length; x++) {
+          let section = document.createElement(this.pageElements[x]);
+          section.headerClass = 'hide';
+          console.log(this.section1);
+          //console.log(this.shadowRoot.querySelector('#section'+(x+1)));
+          console.log(this);
+          //Polymer.dom(this.$.insertion_point).appendChild(dynamicEl);
+          //document.querySelector(routeObject.layout + '::shadow #section'+x).appendChild(section);
+        }
+        console.log(this.pageElements);
+        super.connectedCallback();
+      }
+    }
+    customElements.define(layoutTwoUp.is, layoutTwoUp);
+  </script>
+</dom-module>

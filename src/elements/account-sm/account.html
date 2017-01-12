@@ -4,8 +4,19 @@
 <link rel="import" href="../shared/update-account.html" />
 <dom-module id="account-sm">
   <template>
+    <style>
+      :host {
+        display: block;
+      }
+      .show {
+        display: block;
+      }
+      .hide {
+        display: none;
+      }
+    </style>
     <div>Accounts</div>
-    <dumb-header loggedin="true"></dumb-header>
+    <dumb-header class$="[[headerclass]]" loggedin="true"></dumb-header>
     <account-element account="[[account]]"></account-element>
     <update-account on-saveaccount="save" account="[[account]]"></update-account>
   </template>
@@ -13,7 +24,11 @@
     class AccountSM extends Polymer.Element {
       static get is() { return 'account-sm'; }
       static get config() {
-        return {properties: {}};
+        return {
+          properties: {
+            headerclass: String
+          }
+        };
       }
       constructor() {
         super();
@@ -21,7 +36,7 @@
         this.account.toModel(LocalStorage.load('ACCOUNT'));
       }
       save(e) {
-        LocalStorage.save('ACCOUNT', e.detail);        
+        LocalStorage.save('ACCOUNT', e.detail);
         this.account.toObserveModel(LocalStorage.load('ACCOUNT'));
       }
     }
