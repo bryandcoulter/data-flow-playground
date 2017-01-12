@@ -14,10 +14,10 @@
     </style>
     <dumb-header loggedin="true"></dumb-header>
     <div class="section" id="section1">
-      <account-sm headerclass="hide"></account-sm>
+
     </div>
     <div class="section" id="section2">
-      <useradmin-sm headerclass="hide"></useradmin-sm>
+
     </div>
   </template>
   <script>
@@ -32,20 +32,14 @@
       }
       constructor() {
         super();
-        console.log(this.prototype);
       }
-      connectedCallback() {
+      ready() {
+        super.ready();
         for(let x=0; x<this.pageElements.length; x++) {
           let section = document.createElement(this.pageElements[x]);
-          section.headerClass = 'hide';
-          console.log(this.section1);
-          //console.log(this.shadowRoot.querySelector('#section'+(x+1)));
-          console.log(this);
-          //Polymer.dom(this.$.insertion_point).appendChild(dynamicEl);
-          //document.querySelector(routeObject.layout + '::shadow #section'+x).appendChild(section);
+          section.headerclass = 'hide';
+          this.shadowRoot.querySelector('#section'+(x+1)).appendChild(section);
         }
-        console.log(this.pageElements);
-        super.connectedCallback();
       }
     }
     customElements.define(layoutTwoUp.is, layoutTwoUp);
