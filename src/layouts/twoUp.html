@@ -13,12 +13,8 @@
       }
     </style>
     <dumb-header loggedin="true"></dumb-header>
-    <div class="section" id="section1">
-
-    </div>
-    <div class="section" id="section2">
-
-    </div>
+    <div class="section" id="section1"></div>
+    <div class="section" id="section2"></div>
   </template>
   <script>
     class layoutTwoUp extends CustomBase {
@@ -35,11 +31,12 @@
       }
       ready() {
         super.ready();
-        for(let x=0; x<this.pageElements.length; x++) {
-          let section = document.createElement(this.pageElements[x]);
+
+        this.pageElements.map((value, index) => {          
+          let section = document.createElement(value);
           section.headerclass = 'hide';
-          this.shadowRoot.querySelector('#section'+(x+1)).appendChild(section);
-        }
+          this.shadowRoot.querySelector('#section'+(index+1)).appendChild(section);
+        })
       }
     }
     customElements.define(layoutTwoUp.is, layoutTwoUp);
